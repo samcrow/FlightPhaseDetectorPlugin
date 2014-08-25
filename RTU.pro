@@ -76,7 +76,8 @@ SOURCES += \
     mvc/controllers/rtuadfpage.cpp \
     mvc/views/rtu/rtuadfpageview.cpp \
     mvc/controllers/rtuprimarypage.cpp \
-    mvc/views/rtu/rtuprimarypageview.cpp
+    mvc/views/rtu/rtuprimarypageview.cpp \
+    PPL/src/periodicaction.cpp
 
 HEADERS += \
     plugin_interface/plugin.h \
@@ -98,7 +99,8 @@ HEADERS += \
     mvc/controllers/rtuadfpage.h \
     mvc/views/rtu/rtuadfpageview.h \
     mvc/controllers/rtuprimarypage.h \
-    mvc/views/rtu/rtuprimarypageview.h
+    mvc/views/rtu/rtuprimarypageview.h \
+    PPL/src/periodicaction.h
 
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/PPL/libSCRTUPPL/release/ -lppl

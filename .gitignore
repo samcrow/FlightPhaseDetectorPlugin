@@ -1,3 +1,6 @@
 *.DS_Store
-
+.qmake.stash
+Makefile
+*.o
+*.xpl.dylib
 
