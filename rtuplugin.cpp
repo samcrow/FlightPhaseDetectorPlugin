@@ -5,8 +5,6 @@
 #include <mvc/data/frequency.h>
 #include <plugin_namespace/pluginnamespace.h>
 
-#include <GL/glew.h>
-
 RTUPlugin::RTUPlugin() :
     Plugin("Radio Tuning Unit Plugin", "org.samcrow.rtu", "Simulates a radio tuning unit")
 {

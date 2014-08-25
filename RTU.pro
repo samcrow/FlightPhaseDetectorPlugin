@@ -7,9 +7,9 @@ CONFIG -= thread exceptions qt rtti debug
 
 VERSION = 1.0.0
 
-INCLUDEPATH += ./SDK21/CHeaders/XPLM
-INCLUDEPATH += ./SDK21/CHeaders/Wrappers
-INCLUDEPATH += ./SDK21/CHeaders/Widgets
+INCLUDEPATH += ./SDK/CHeaders/XPLM
+INCLUDEPATH += ./SDK/CHeaders/Wrappers
+INCLUDEPATH += ./SDK/CHeaders/Widgets
 
 # Defined to use X-Plane SDK 2.0 capabilities - no backward compatibility before 9.0
 DEFINES += XPLM200 XPLM210
@@ -19,7 +19,7 @@ DEFINES += PRIVATENAMESPACE=SC604RTUPPL
 
 win32 {
         DEFINES += APL=0 IBM=1 LIN=0
-        LIBS += -L../SDK12/Libraries/Win
+        LIBS += -L../SDK/Libraries/Win
         LIBS += -lXPLM -lXPWidgets
         TARGET = win.xpl
 }
@@ -101,16 +101,16 @@ HEADERS += \
     mvc/views/rtu/rtuprimarypageview.h
 
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/PPL-custom/libPPL/release/ -lppl
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/PPL-custom/libPPL/debug/ -lppl
-else:unix: LIBS += -L$$PWD/PPL-custom/libPPL/ -lppl
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/PPL/libSCRTUPPL/release/ -lppl
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/PPL/libSCRTUPPL/debug/ -lppl
+else:unix: LIBS += -L$$PWD/PPL/libSCRTUPPL/ -lppl
 
 INCLUDEPATH += $$PWD/PPL/src
 DEPENDPATH += $$PWD/PPL/src
 
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/PPL-custom/libPPL/release/libppl.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/PPL-custom/libPPL/debug/libppl.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/PPL-custom/libPPL/release/ppl.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/PPL-custom/libPPL/debug/ppl.lib
-else:unix: PRE_TARGETDEPS += $$PWD/PPL-custom/libPPL/libppl.a
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/PPL/libSCRTUPPL/release/libppl.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/PPL/libSCRTUPPL/debug/libppl.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/PPL/libSCRTUPPL/release/ppl.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/PPL/libSCRTUPPL/debug/ppl.lib
+else:unix: PRE_TARGETDEPS += $$PWD/PPL/libSCRTUPPL/libppl.a
 

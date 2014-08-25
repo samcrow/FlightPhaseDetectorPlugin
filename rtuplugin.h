@@ -2,6 +2,8 @@
 #define GRAPHICSPLUGIN_H
 #include "plugin_interface/plugin.h"
 
+
+#include <GL/glew.h>
 #include "mvc/controllers/rtucontroller.h"
 #include "mvc/models/tuningmodelxplane.h"
 #include "mvc/connectors/rtuxplanecommandconnector.h"
