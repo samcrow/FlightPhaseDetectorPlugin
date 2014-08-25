@@ -2,7 +2,7 @@
 TEMPLATE = lib
 QT -= gui core
 
-CONFIG += warn_on plugin release c++11
+CONFIG += warn_on plugin debug c++11
 CONFIG -= thread exceptions qt rtti debug
 
 VERSION = 1.0.0
@@ -14,7 +14,7 @@ INCLUDEPATH += ./SDK/CHeaders/Widgets
 # Defined to use X-Plane SDK 2.0 capabilities - no backward compatibility before 9.0
 DEFINES += XPLM200 XPLM210
 
-DEFINES += PRIVATENAMESPACE=SC604RTUPPL
+DEFINES += PRIVATENAMESPACE=SCRTUPPL
 
 
 win32 {
@@ -99,8 +99,7 @@ HEADERS += \
     mvc/controllers/rtuadfpage.h \
     mvc/views/rtu/rtuadfpageview.h \
     mvc/controllers/rtuprimarypage.h \
-    mvc/views/rtu/rtuprimarypageview.h \
-    PPL/src/periodicaction.h
+    mvc/views/rtu/rtuprimarypageview.h
 
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/PPL/libSCRTUPPL/release/ -lppl

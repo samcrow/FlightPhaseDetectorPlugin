@@ -8,11 +8,14 @@
 
 RTUController::RTUController(TuningModel &model) :
     PPL::Controller < TuningModel > ("Radio Tuning Unit controller", model),
+    primaryPage(model),
     atcPage(model),
     adfPage(model),
-    activePage(&adfPage)
+    // Set default active page
+    activePage(&primaryPage)
 {
     // Hook up the page change signal for every page
+    primaryPage.setPage.connect(boost::bind(&RTUController::setActivePage, this, _1));
     atcPage.setPage.connect(boost::bind(&RTUController::setActivePage, this, _1));
     adfPage.setPage.connect(boost::bind(&RTUController::setActivePage, this, _1));
 }
@@ -21,6 +24,12 @@ void RTUController::setActivePage(RTUPage::Page newPage) {
     switch(newPage) {
     // TODO
     
+    case RTUPage::Page::Primary:
+        activePage = &primaryPage;
+        break;
+    case RTUPage::Page::ADF:
+        activePage = &adfPage;
+        break;
     case RTUPage::Page::ATC:
         activePage = &atcPage;
         break;

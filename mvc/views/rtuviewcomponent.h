@@ -4,6 +4,8 @@
 #include <mvc/view/viewcomponent.h>
 #include <mvc/view/graphicscontext.h>
 #include "rtumetrics.h"
+#include "../data/frequency.h"
+#include <sstream>
 
 template < class ModelType >
 class RTUViewComponent : public PPL::ViewComponent < ModelType >
@@ -31,6 +33,19 @@ protected:
      * @brief The white color used for RTU graphics
      */
     static const PPL::Color white;
+    
+    /**
+     * @brief Converts a Frequency into a string representation with two decimal places
+     * @param frequency
+     * @return 
+     */
+    static std::string frequencyToString(Frequency frequency) {
+        std::stringstream stream;
+        stream.precision(2);
+        stream << std::fixed;
+        stream << frequency.kilohertz() * 100;
+        return stream.str();
+    }
     
 };
 

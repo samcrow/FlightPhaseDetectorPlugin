@@ -32,6 +32,8 @@ RTUMetrics::Metrics RTUMetrics::getMetrics(float screenLeft, float screenRight, 
     metrics.col2Center = screenLeft + width * 1/2;
     metrics.col3Center = screenLeft + width * 3/4;
     
+    metrics.col2aCenter = ( metrics.col2Center + metrics.col3Center ) / 2;
+    
     return metrics;
 }
 

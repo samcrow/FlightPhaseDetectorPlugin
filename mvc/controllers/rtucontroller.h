@@ -7,6 +7,7 @@
 #include "rtupage.h"
 #include "rtuatcpage.h"
 #include "rtuadfpage.h"
+#include "rtuprimarypage.h"
 
 class RTUController : public PPL::Controller < TuningModel >, public PPL::Drawable
 {
@@ -53,6 +54,7 @@ private:
     void setActivePage(RTUPage::Page newPage);
     
     // Pages
+    RTUPrimaryPage primaryPage;
     RTUATCPage atcPage;
     RTUADFPage adfPage;
     
