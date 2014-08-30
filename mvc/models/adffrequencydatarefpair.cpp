@@ -8,11 +8,11 @@ ADFFrequencyDataRefPair::ADFFrequencyDataRefPair(std::string activeDataRefName, 
 
 Frequency ADFFrequencyDataRefPair::getActive() {
     // Datarefs store frequencies in kilohertz
-    return Frequency(uint32_t(active * 1000));
+    return Frequency(int32_t(active * 1000));
 }
 
 Frequency ADFFrequencyDataRefPair::getStandby() {
-    return Frequency(uint32_t(standby * 1000));
+    return Frequency(int32_t(standby * 1000));
 }
 
 void ADFFrequencyDataRefPair::setActive(Frequency newActive) {

@@ -10,11 +10,11 @@ Frequency::Frequency(std::string megahertz) :
 {  
 }
 
-uint32_t Frequency::hertz() const {
+int32_t Frequency::hertz() const {
     return hertz_;
 }
 
-uint32_t Frequency::ten_hertz() const {
+int32_t Frequency::ten_hertz() const {
     return hertz_ / 10;
 }
 
@@ -66,6 +66,10 @@ void Frequency::operator -= (const Frequency& other) {
 
 void Frequency::operator += (const Frequency& other) {
     hertz_ += other.hertz();
+}
+
+Frequency Frequency::operator - () const {
+    return Frequency(-hertz_);
 }
 
 std::ostream& operator << (std::ostream& stream, const Frequency& freq) {

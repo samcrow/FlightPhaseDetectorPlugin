@@ -8,12 +8,9 @@ void RTUADFPageView::draw(PPL::GraphicsContext &gc) {
     gc.strokeTextCentered("ADF1", metrics.col2Center, metrics.line1Label, PPL::GraphicsContext::Monospace, metrics.primaryLabelSize);
     
     // ADF frequency in kilohertz, three digits with one decimal digit
-    std::stringstream freqStream;
-    freqStream.precision(1);
-    freqStream << std::fixed;
-    freqStream << model().getADF1().kilohertz();
+
     gc.setStroke(green);
-    gc.strokeTextCentered(freqStream.str(), metrics.col1Center, metrics.line1Center, PPL::GraphicsContext::Monospace, metrics.primaryValueSize);
+    gc.strokeTextCentered(adfFrequencyToString(model().getADF1()), metrics.col1Center, metrics.line1Center, PPL::GraphicsContext::Monospace, metrics.primaryValueSize);
     
     // Box around frequency
     const float boxTop = 2 + metrics.line1Center + metrics.primaryValueSize;
@@ -29,7 +26,7 @@ void RTUADFPageView::draw(PPL::GraphicsContext &gc) {
     
     PPL::Color adfColor;
     PPL::Color antColor;
-    if(model().getADFMode() == TuningModel::ADF) {
+    if(model().getADFMode() == TuningModel::ADFMode::ADF) {
         adfColor = blue;
         antColor = white;
     }

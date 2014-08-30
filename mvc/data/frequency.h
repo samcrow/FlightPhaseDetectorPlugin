@@ -21,7 +21,7 @@ public:
     {
     }
     
-    constexpr Frequency(uint32_t hertz) :
+    constexpr Frequency(int32_t hertz) :
         hertz_(hertz)
     {
     }
@@ -39,12 +39,12 @@ public:
     /**
      * @brief Returns this frequency in hertz
      */
-    uint32_t hertz() const;
+    int32_t hertz() const;
     
     /**
      * @brief Returns this frequency in tens of hertz
      */
-    uint32_t ten_hertz() const;
+    int32_t ten_hertz() const;
     
     /**
      * @return This frequency in megahertz
@@ -90,12 +90,19 @@ public:
     
     void operator -= (const Frequency& other);
     
+    /**
+     * @brief Creates a Frequency that is a negated
+     * version of this frequency
+     * @return 
+     */
+    Frequency operator - () const;
+    
 private:
     
     /**
      * @brief The underlying frequency, in hertz.
      */
-    uint32_t hertz_;
+    int32_t hertz_;
     
 };
 
@@ -107,7 +114,7 @@ private:
   */ 
 constexpr Frequency operator "" _hz ( unsigned long long hertz ) {
     
-    return Frequency(uint32_t(hertz));
+    return Frequency(int32_t(hertz));
 }
 
 /**
@@ -117,7 +124,7 @@ constexpr Frequency operator "" _hz ( unsigned long long hertz ) {
   * Example: Frequency nav1 = 111700_khz
   */ 
 constexpr Frequency operator "" _khz (unsigned long long kilohertz ) {
-    return Frequency(  uint32_t(kilohertz) * 1000  );
+    return Frequency( int32_t(kilohertz) * 1000  );
 }
 
 /**
@@ -127,7 +134,7 @@ constexpr Frequency operator "" _khz (unsigned long long kilohertz ) {
   * Example: Frequency nav1 = 111.70_khz
   */ 
 constexpr Frequency operator "" _khz (long double kilohertz ) {
-    return Frequency(  uint32_t( kilohertz * 1000 )  );
+    return Frequency( int32_t( kilohertz * 1000 )  );
 }
 
 /**
@@ -137,7 +144,7 @@ constexpr Frequency operator "" _khz (long double kilohertz ) {
   * Example: Frequency nav1 = 111.70_mhz
   */ 
 constexpr Frequency operator "" _mhz (long double megahertz ) {
-    return Frequency(  uint32_t( megahertz * 1000000 )  );
+    return Frequency( int32_t( megahertz * 1000000 )  );
 }
 
 /**
@@ -147,7 +154,7 @@ constexpr Frequency operator "" _mhz (long double megahertz ) {
   * Example: Frequency nav1 = 111_mhz
   */ 
 constexpr Frequency operator "" _mhz (unsigned long long megahertz ) {
-    return Frequency(  uint32_t( megahertz * 1000000 )  );
+    return Frequency( int32_t( megahertz * 1000000 )  );
 }
 
 #endif // FREQUENCY_H

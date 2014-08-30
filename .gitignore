@@ -3,4 +3,5 @@
 Makefile
 *.o
 *.xpl.dylib
+*.pro.user
 

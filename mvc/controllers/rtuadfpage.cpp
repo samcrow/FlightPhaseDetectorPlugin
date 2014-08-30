@@ -11,11 +11,11 @@ RTUADFPage::RTUADFPage(TuningModel &model) :
 void RTUADFPage::leftLine2Pressed() {
     // Toggle mode
     TuningModel::ADFMode mode = model().getADFMode();
-    if(mode == TuningModel::ADF) {
-        model().setADFMode(TuningModel::ANT);
+    if(mode == TuningModel::ADFMode::ADF) {
+        model().setADFMode(TuningModel::ADFMode::ANT);
     }
     else {
-        model().setADFMode(TuningModel::ADF);
+        model().setADFMode(TuningModel::ADFMode::ADF);
     }
 }
 

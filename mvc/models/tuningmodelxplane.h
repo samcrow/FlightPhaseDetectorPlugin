@@ -3,17 +3,29 @@
 #include "tuningmodel.h"
 #include "frequencydatarefpair.h"
 #include "adffrequencydatarefpair.h"
+#include "frequencyowneddatapair.h"
 #include <externalcommand.h>
 #include <owneddata.h>
 
 class TuningModelXPlane : public TuningModel
 {
 public:
-    TuningModelXPlane();
+    
+    /**
+     * @brief Constructor
+     * @param rtuName The name of this RTU. This is used to
+     * give this RTU model a unique environment with its own datarefs.
+     * @param defaultRadios The set of radio frequencies that the RTU should be
+     * set up to tune by default
+     */
+    TuningModelXPlane(const std::string& rtuName, Radios defaultRadios);
     
     // TuningModel interface
+    
+    virtual Radios getSelectedRadios() override;
+    virtual void setSelectedRadios(Radios radios) override;
 
-    virtual Frequency getNav1();
+    virtual Frequency getNav1() override;
     virtual void setNav1(Frequency frequency) override;
     virtual Frequency getNav2() override;
     virtual void setNav2(Frequency frequency) override;
@@ -52,12 +64,12 @@ public:
     virtual void setADF2Standby(Frequency frequency) override;
     
     // ADF section
-    virtual ADFMode getADFMode();
-    virtual void setADFMode(ADFMode mode);
-    virtual bool isADFInTestMode();
-    virtual void setADFTestMode(bool testMode);
-    virtual bool isADFToneEnabled();
-    virtual void setADFToneEnabled(bool enabled);
+    virtual ADFMode getADFMode() override;
+    virtual void setADFMode(ADFMode mode) override;
+    virtual bool isADFInTestMode() override;
+    virtual void setADFTestMode(bool testMode) override;
+    virtual bool isADFToneEnabled() override;
+    virtual void setADFToneEnabled(bool enabled) override;
     
     // Transponder section
     virtual int getTransponderCode() override;
@@ -74,13 +86,20 @@ public:
     virtual bool isTransponderAltitudeDisplayed() override;
     virtual void setTransponderAltitudeDisplayed(bool displayed) override;
     
+    // TCAS section
+    virtual TcasMode getTcasMode() override;
+    virtual void setTcasMode(TcasMode mode) override;
+    virtual AltitudeReadoutMode getAltitudeReadoutMode() override;
+    virtual void setAltitudeReadoutMode(AltitudeReadoutMode mode) override;
+    virtual bool isDisplayingAllTraffic() override;
+    virtual void setDisplayAllTraffic(bool displayAllTraffic) override;
+    virtual AltitudeRange getDisplayedAltitudeRange() override;
+    virtual void setDisplayedAltitudeRange(AltitudeRange range) override;
+    
     virtual ~TuningModelXPlane();
     
 private:
     
-    
-    // These frequencies are not used by X-Plane. They are stored here in the model.
-    Frequency com3, com3Standby;
     
     Frequency hf1, hf1Standby;
     
@@ -93,6 +112,7 @@ private:
     
     FrequencyDataRefPair com1;
     FrequencyDataRefPair com2;
+    FrequencyOwnedDataPair com3;
     
     ADFFrequencyDataRefPair adf1;
     ADFFrequencyDataRefPair adf2;
@@ -129,6 +149,16 @@ private:
      * Dataref: If the ADF tone is enabled, boolean
      */
     PPL::OwnedData<int> adfToneEnabled;
+    
+    PPL::OwnedData<int> selectedRadios;
+    
+    PPL::OwnedData<int> tcasMode;
+    
+    PPL::OwnedData<int> tcasAltitudeReadoutMode;
+    
+    PPL::OwnedData<int> tcasDisplayingAllTraffic;
+    
+    PPL::OwnedData<int> tcasDisplayedAltitudeRange;
     
 };
 

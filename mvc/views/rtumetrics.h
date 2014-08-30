@@ -24,7 +24,7 @@ public:
         // X center positions for the three columns
         float col1Center;
         float col2Center;
-        /// Halfway in between columns 2 and 3; useful for big radio frequencies on the right side
+        /// Halfway in between columns 2 and 3
         float col2aCenter;
         
         float col3Center;

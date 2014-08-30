@@ -6,6 +6,8 @@
 #include "rtumetrics.h"
 #include "../data/frequency.h"
 #include <sstream>
+#include <iomanip>
+#include <iostream>
 
 template < class ModelType >
 class RTUViewComponent : public PPL::ViewComponent < ModelType >
@@ -39,11 +41,22 @@ protected:
      * @param frequency
      * @return 
      */
-    static std::string frequencyToString(Frequency frequency) {
+    inline static std::string frequencyToString(Frequency frequency) {
+        
         std::stringstream stream;
         stream.precision(2);
+        stream << std::setw(6);
+        stream.fill('0');
         stream << std::fixed;
-        stream << frequency.kilohertz() * 100;
+        stream << frequency.megahertz();
+        return stream.str();
+    }
+    
+    inline static std::string adfFrequencyToString(Frequency frequency) {
+        std::stringstream stream;
+        stream.precision(1);
+        stream << std::fixed;
+        stream << frequency.kilohertz();
         return stream.str();
     }
     

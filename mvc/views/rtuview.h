@@ -12,7 +12,7 @@ class RTUView : public PPL::OverlayGaugeView < RTUController >
 public:
     RTUView(RTUController& controller);
     
-    void draw(int left, int top, int right, int bottom) override;
+    virtual void advancedDraw(int left, int top, int right, int bottom) override;
     
     virtual ~RTUView();
 private:
@@ -28,6 +28,11 @@ private:
     PPL::ClickRegion rightLine2;
     PPL::ClickRegion rightLine3;
     PPL::ClickRegion rightLine4;
+    
+    PPL::ClickRegion outerKnobLeft;
+    PPL::ClickRegion outerKnobRight;
+    PPL::ClickRegion innerKnobLeft;
+    PPL::ClickRegion innerKnobRight;
     
     PPL::ClickRegion ident;
     PPL::ClickRegion dmeHold;

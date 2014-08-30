@@ -22,7 +22,7 @@ RTUPlugin::RTUPlugin() :
     
     
     // Set up model testing
-    model = new TuningModelXPlane();
+    model = new TuningModelXPlane("Pilot", TuningModel::Radios::Set1);
     controller = new RTUController(*model);
     
     connector = new RTUXPlaneCommandConnector(*controller);

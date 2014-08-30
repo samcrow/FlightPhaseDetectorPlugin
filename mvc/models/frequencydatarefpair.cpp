@@ -7,18 +7,18 @@ FrequencyDataRefPair::FrequencyDataRefPair(std::string activeDataRefName, std::s
 }
 
 Frequency FrequencyDataRefPair::getActive() {
-    // Datarefs store frequencies in tens of hertz
-    return Frequency(uint32_t(active / 10));
+    // Datarefs store frequencies in megahertz * 100
+    return Frequency(int32_t(active * 10000));
 }
 
 Frequency FrequencyDataRefPair::getStandby() {
-    return Frequency(uint32_t(standby / 10));
+    return Frequency(int32_t(standby * 10000));
 }
 
 void FrequencyDataRefPair::setActive(Frequency newActive) {
-    active = newActive.ten_hertz();
+    active = newActive.hertz() / 10000;
 }
 
 void FrequencyDataRefPair::setStandby(Frequency newStandby) {
-    standby = newStandby.ten_hertz();
+    standby = newStandby.hertz() / 10000;
 }

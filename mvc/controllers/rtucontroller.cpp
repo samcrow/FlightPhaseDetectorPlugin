@@ -83,7 +83,18 @@ void RTUController::dmeHoldPressed() {
 }
 
 void RTUController::leftRightPressed() {
+    // Switch the radio select
+    switch(model().getSelectedRadios()) {
+    case TuningModel::Radios::Set1:
+        model().setSelectedRadios(TuningModel::Radios::Set2);
+        break;
+    case TuningModel::Radios::Set2:
+        model().setSelectedRadios(TuningModel::Radios::Set1);
+        break;
     
+    default:
+        throw std::logic_error("An RTU's selected radio was set to an invalid value");
+    }
 }
 
 void RTUController::outerKnobClockwise() {

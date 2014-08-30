@@ -2,8 +2,8 @@
 TEMPLATE = lib
 QT -= gui core
 
-CONFIG += warn_on plugin debug c++11
-CONFIG -= thread exceptions qt rtti debug
+CONFIG += warn_on plugin debug c++11 debug
+CONFIG -= thread exceptions qt rtti
 
 VERSION = 1.0.0
 
@@ -77,7 +77,8 @@ SOURCES += \
     mvc/views/rtu/rtuadfpageview.cpp \
     mvc/controllers/rtuprimarypage.cpp \
     mvc/views/rtu/rtuprimarypageview.cpp \
-    PPL/src/periodicaction.cpp
+    mvc/models/frequencyowneddatapair.cpp \
+    mvc/controllers/rtufrequencypaircontroller.cpp
 
 HEADERS += \
     plugin_interface/plugin.h \
@@ -99,7 +100,9 @@ HEADERS += \
     mvc/controllers/rtuadfpage.h \
     mvc/views/rtu/rtuadfpageview.h \
     mvc/controllers/rtuprimarypage.h \
-    mvc/views/rtu/rtuprimarypageview.h
+    mvc/views/rtu/rtuprimarypageview.h \
+    mvc/models/frequencyowneddatapair.h \
+    mvc/controllers/rtufrequencypaircontroller.h
 
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/PPL/libSCRTUPPL/release/ -lppl
