@@ -82,27 +82,6 @@ RTUView::RTUView(RTUController &controller) :
     dmeHold.addClickHandler(boost::bind(&RTUController::dmeHoldPressed, controllerPtr));
     leftRightSelect.addClickHandler(boost::bind(&RTUController::leftRightPressed, controllerPtr));
     
-    // Memory-leaking click regions for testing
-    constexpr int top = 40;
-    constexpr int bottom = 30;
-    addClickRegion(new PPL::ClickRegion(top, 1, bottom, 5, PPL::CursorType::ArrowUp));
-    addClickRegion(new PPL::ClickRegion(top, 6, bottom, 10, PPL::CursorType::ArrowDown));
-    addClickRegion(new PPL::ClickRegion(top, 11, bottom, 15, PPL::CursorType::RotateLargeCounterclockwise));
-    addClickRegion(new PPL::ClickRegion(top, 16, bottom, 20, PPL::CursorType::RotateLargeClockwise));
-    addClickRegion(new PPL::ClickRegion(top, 21, bottom, 25, PPL::CursorType::RotateMediumCounterclockwise));
-    addClickRegion(new PPL::ClickRegion(top, 26, bottom, 30, PPL::CursorType::RotateMediumClockwise));
-    addClickRegion(new PPL::ClickRegion(top, 31, bottom, 35, PPL::CursorType::RotateSmallCounterclockwise));
-    addClickRegion(new PPL::ClickRegion(top, 36, bottom, 40, PPL::CursorType::RotateSmallClockwise));
-    addClickRegion(new PPL::ClickRegion(top, 41, bottom, 45, PPL::CursorType::ResizeHorizontal));
-    addClickRegion(new PPL::ClickRegion(top, 46, bottom, 50, PPL::CursorType::ResizeVertical));
-    addClickRegion(new PPL::ClickRegion(top, 51, bottom, 55, PPL::CursorType::MoveHorizontal));
-    addClickRegion(new PPL::ClickRegion(top, 56, bottom, 60, PPL::CursorType::MoveVertical));
-    addClickRegion(new PPL::ClickRegion(top, 61, bottom, 65, PPL::CursorType::Move));
-    addClickRegion(new PPL::ClickRegion(top, 66, bottom, 70, PPL::CursorType::HandOpen));
-    addClickRegion(new PPL::ClickRegion(top, 71, bottom, 75, PPL::CursorType::HandPointing));
-    addClickRegion(new PPL::ClickRegion(top, 76, bottom, 80, PPL::CursorType::HandClosed));
-    addClickRegion(new PPL::ClickRegion(top, 81, bottom, 86, PPL::CursorType::SmallCircle));
-    
 }
 
 void RTUView::advancedDraw(int left, int top, int right, int bottom) {
