@@ -2,6 +2,7 @@
 #define EGPWSPLUGIN_H
 #include "plugin_interface/plugin.h"
 #include "mvc/models/airdatamodel.h"
+#include "fsm/fsmdefs.h"
 
 namespace FlightPhaseDetector {
 
@@ -16,8 +17,8 @@ public:
     
 private:
     
-    AirDataModel* airDataModel;
-    
+    std::unique_ptr<AirDataModel> airDataModel;
+    std::unique_ptr<FSM::StateMachine> stateMachine;
 };
 
 }

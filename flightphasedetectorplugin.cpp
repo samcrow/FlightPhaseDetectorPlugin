@@ -2,7 +2,6 @@
 #include "mvc/models/airdatamodelxplane.h"
 #include <plugin_namespace/pluginnamespace.h>
 #include <pluginpath.h>
-#include "fsm/fsmdefs.h"
 
 namespace FlightPhaseDetector {
 
@@ -12,10 +11,15 @@ FlightPhaseDetectorPlugin::FlightPhaseDetectorPlugin() :
     PPL::PluginPath::setPluginDirectoryName("FlightPhaseDetector");
     PPL::PluginNamespace::setOuterNamespace({"Flight Phase Detector"});
     
-    FSM::StateMachine stateMachine;
-    stateMachine.initiate();
+
     
-    airDataModel = new AirDataModelXPlane(AirDataModel::Source::Pilot);
+    airDataModel.reset(new AirDataModelXPlane(AirDataModel::Source::Pilot));
+    stateMachine.reset(new FSM::StateMachine());
+    stateMachine->initiate();
+    stateMachine->process_event( FSM::Event::Liftoff() );
+    stateMachine->process_event( FSM::Event::Touchdown() );
+    stateMachine->process_event( FSM::Event::Liftoff() );
+    stateMachine->process_event( FSM::Event::Touchdown() );
 }
 
 int FlightPhaseDetectorPlugin::onEnable()
@@ -31,7 +35,8 @@ void FlightPhaseDetectorPlugin::onDisable()
 
 void FlightPhaseDetectorPlugin::onStop()
 {
-    delete airDataModel;
+    airDataModel.reset();
+    stateMachine.reset();
 }
 
 

@@ -64,7 +64,11 @@ HEADERS += \
     mvc/models/flightphasemodel.h \
     fsm/fsmdefs.h \
     fsm/events.h \
-    fsm/outer_states.h
+    fsm/outer_states.h \
+    fsm/ground_states.h \
+    fsm/ground_states_fwd.h \
+    fsm/air_states.h \
+    fsm/air_states_fwd.h
 
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/PPL/lib$$PRIVATENAMESPACE/release/ -lppl

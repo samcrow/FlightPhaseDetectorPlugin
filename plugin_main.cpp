@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include <string.h>
+#include <sstream>
 #include <XPLMUtilities.h>
-#include <XPLMDataAccess.h>
-#include <pluginpath.h>
 
 #include "flightphasedetectorplugin.h"
 
@@ -17,33 +14,61 @@ PLUGIN_API int XPluginStart(
                         char *		outSig,
                         char *		outDesc)
 {
-    
-    //Init the plugin
-    plugin = new FlightPhaseDetector::FlightPhaseDetectorPlugin();
-
-    //Get the plugin's information
-    strcpy(outName, plugin->getName().c_str());
-    strcpy(outSig, plugin->getSignature().c_str());
-    strcpy(outDesc, plugin->getDescription().c_str());
-
-    return 1;
+    try {
+        //Init the plugin
+        plugin = new FlightPhaseDetector::FlightPhaseDetectorPlugin();
+        
+        //Get the plugin's information
+        strcpy(outName, plugin->getName().c_str());
+        strcpy(outSig, plugin->getSignature().c_str());
+        strcpy(outDesc, plugin->getDescription().c_str());
+        
+        return 1;
+    }
+    catch (std::exception& ex) {
+        std::stringstream stream;
+        stream << "Plugin failed to load: " << ex.what() << '\n';
+        XPLMDebugString(stream.str().c_str());
+        return 0;
+    }
 }
 
 PLUGIN_API void	XPluginStop(void)
 {
-    plugin->onStop();
-    delete plugin;
+    try {
+        plugin->onStop();
+        delete plugin;
+    }
+    catch (std::exception& ex) {
+        std::stringstream stream;
+        stream << "Plugin failed to stop: " << ex.what() << '\n';
+        XPLMDebugString(stream.str().c_str());
+    }
 }
 
 
 PLUGIN_API void XPluginDisable(void)
 {
-    plugin->onDisable();
+    try {
+        plugin->onDisable();
+    }
+    catch (std::exception& ex) {
+        std::stringstream stream;
+        stream << "Plugin failed to disable: " << ex.what() << '\n';
+        XPLMDebugString(stream.str().c_str());
+    }
 }
 
 PLUGIN_API int XPluginEnable(void)
 {
-    return plugin->onEnable();
+    try {
+        plugin->onEnable();
+    }
+    catch (std::exception& ex) {
+        std::stringstream stream;
+        stream << "Plugin failed to enable: " << ex.what() << '\n';
+        XPLMDebugString(stream.str().c_str());
+    }
 }
 
 PLUGIN_API void XPluginReceiveMessage(
@@ -51,6 +76,13 @@ PLUGIN_API void XPluginReceiveMessage(
                     long			inMessage,
                     void *			inParam)
 {
-    plugin->onMessageReceived(inFromWho, inMessage, inParam);
+    try {
+        plugin->onMessageReceived(inFromWho, inMessage, inParam);
+    }
+    catch (std::exception& ex) {
+        std::stringstream stream;
+        stream << "Plugin threw exception from onMessageReceived: " << ex.what() << '\n';
+        XPLMDebugString(stream.str().c_str());
+    }
 }
 
