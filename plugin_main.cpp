@@ -4,7 +4,7 @@
 #include <XPLMDataAccess.h>
 #include <pluginpath.h>
 
-#include "rtuplugin.h"
+#include "flightphasedetectorplugin.h"
 
 /**
   The plugin.
@@ -19,7 +19,7 @@ PLUGIN_API int XPluginStart(
 {
     
     //Init the plugin
-    plugin = new RTUPlugin();
+    plugin = new FlightPhaseDetector::FlightPhaseDetectorPlugin();
 
     //Get the plugin's information
     strcpy(outName, plugin->getName().c_str());
